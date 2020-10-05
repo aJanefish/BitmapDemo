@@ -133,7 +133,32 @@ public class BitmapActivity extends AppCompatActivity {
 
     public void noGTest(View view) {
         Bitmap bitmap = pictureProcessing(ycy, 0XFFFF_00FF);
-        show(bitmap);
+        //show(bitmap);
         imageView.setImageBitmap(bitmap);
     }
+
+    public void negation(View view) {
+        Bitmap bitmap = negation(ycy);
+        //show(bitmap);
+        imageView.setImageBitmap(bitmap);
+    }
+
+    //图片取反
+    private Bitmap negation(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        for (int w = 0; w < width; w++) {
+            for (int h = 0; h < height; h++) {
+                int c = bitmap.getPixel(w, h);
+                int a = c & 0xff00_0000 >> 24;
+                int r = c & 0x00ff_0000 >> 16;
+                int g = c & 0x0000_ff00 >> 8;
+                int b = c & 0x0000_00ff;
+                newBitmap.setPixel(w, h, Color.argb(255 - a, 255 - r, 255 - g, 255 - b));
+            }
+        }
+        return newBitmap;
+    }
+
 }

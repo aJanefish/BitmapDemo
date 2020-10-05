@@ -15,6 +15,7 @@ public class Constant {
 
         list.add(createMainEvent("Bitmap初识", "图像像素点", "com.example.bitmapdemo", "com.example.bitmapdemo.activity.BitmapActivity"));
         list.add(createMainEvent("Color初识", "所有颜色", "com.example.bitmapdemo", "com.example.bitmapdemo.activity.ColorActivity"));
+        list.add(createMainEvent("图像高级处理", "高级处理", "com.example.bitmapdemo", "com.example.bitmapdemo.activity.HighClassActivity"));
 
 
         return list;

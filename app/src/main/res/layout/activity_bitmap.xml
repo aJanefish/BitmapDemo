@@ -68,7 +68,11 @@
                 android:layout_height="wrap_content"
                 android:onClick="noBTest"
                 android:text="非B测试" />
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="negation"
+                android:text="图片取反" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
