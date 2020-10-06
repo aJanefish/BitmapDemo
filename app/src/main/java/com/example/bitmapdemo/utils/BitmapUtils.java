@@ -49,10 +49,10 @@ public class BitmapUtils {
         for (int w = 0; w < width; w++) {
             for (int h = 0; h < height; h++) {
                 int c = originBitmap.getPixel(w, h);
-                int r = c & 0x00ff_0000 >> 16;
-                int g = c & 0x0000_ff00 >> 8;
-                int b = c & 0x0000_00ff;
-                int a = c & 0xff00_0000 >> 24;
+                int r = Color.red(c);
+                int g = Color.green(c);
+                int b = Color.blue(c);
+                int a = Color.alpha(c);
 
                 int newR = (int) (0.213f * r + 0.715f * g + 0.072f * b + 0.0f * a);
                 int newG = (int) (0.213f * r + 0.715f * g + 0.072f * b + 0.0f * a);
@@ -63,4 +63,40 @@ public class BitmapUtils {
         }
         return newBitmap;
     }
+
+    /**
+     * 获取改变了色值，透明度，亮度的BitMap
+     *
+     * @param bitmap
+     * @param rotate     色值
+     * @param saturation 透明度
+     * @param scale      亮度
+     * @return
+     */
+    public static Bitmap handleImageEffect(Bitmap bitmap, float rotate, float saturation, float scale) {
+        Bitmap newBitMap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        //色值
+        ColorMatrix rotateMatrix = new ColorMatrix();
+        rotateMatrix.setRotate(0, rotate);//red
+        rotateMatrix.setRotate(1, rotate);//green
+        rotateMatrix.setRotate(2, rotate);//blue
+        //透明度
+        ColorMatrix saturationMatrix = new ColorMatrix();
+        saturationMatrix.setSaturation(saturation);
+        //亮度
+        ColorMatrix scaleMatrix = new ColorMatrix();
+        scaleMatrix.setScale(scale, scale, scale, 1);
+
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.postConcat(rotateMatrix);
+        colorMatrix.postConcat(saturationMatrix);
+        colorMatrix.postConcat(scaleMatrix);
+
+        Canvas canvas = new Canvas(newBitMap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+        canvas.drawBitmap(bitmap, 0, 0, paint);
+        return newBitMap;
+    }
+
 }
