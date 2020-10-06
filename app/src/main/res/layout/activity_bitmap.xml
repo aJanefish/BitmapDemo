@@ -71,8 +71,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="negation"
-                android:text="图片取反" />
+                android:onClick="negation1"
+                android:text="图片取反1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="negation2"
+                android:text="图片取反2" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

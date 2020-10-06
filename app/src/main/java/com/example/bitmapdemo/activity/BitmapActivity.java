@@ -137,14 +137,13 @@ public class BitmapActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
     }
 
-    public void negation(View view) {
-        Bitmap bitmap = negation(ycy);
-        //show(bitmap);
+    public void negation1(View view) {
+        Bitmap bitmap = negation1(ycy);
         imageView.setImageBitmap(bitmap);
     }
 
     //图片取反
-    private Bitmap negation(Bitmap bitmap) {
+    private Bitmap negation1(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -161,4 +160,24 @@ public class BitmapActivity extends AppCompatActivity {
         return newBitmap;
     }
 
+    //图片取反2
+    private Bitmap negation2(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        for (int w = 0; w < width; w++) {
+            for (int h = 0; h < height; h++) {
+                int c = bitmap.getPixel(w, h);
+                int newC = ~c;
+                newC = newC | 0xff00_0000;
+                newBitmap.setPixel(w, h, newC);
+            }
+        }
+        return newBitmap;
+    }
+
+    public void negation2(View view) {
+        Bitmap bitmap = negation2(ycy);
+        imageView.setImageBitmap(bitmap);
+    }
 }
